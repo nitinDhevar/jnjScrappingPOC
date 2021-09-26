@@ -37,6 +37,7 @@ def uploadFiles():
       return redirect(url_for('index'))
 
 @app.route('/get-files/<path:path>',methods = ['GET','POST'])
+@cross_origin(supports_credentials=True)
 def get_files(path):
 
     """Download a file."""
