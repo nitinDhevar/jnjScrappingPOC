@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for ,send_from_
 import os
 from os.path import join, dirname, realpath
 from flask_cors import CORS, cross_origin
+import script
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
@@ -40,6 +41,10 @@ def get_files(path):
 
     """Download a file."""
     return send_from_directory(DOWNLOAD_DIRECTORY, path, as_attachment=True)
+
+@app.route('/runscript')
+def dynamic_page():
+    return script.your_function_in_the_module()
 
 
 
