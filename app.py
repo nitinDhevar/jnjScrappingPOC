@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
 from os.path import join, dirname, realpath
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-
+CORS(app, support_credentials=True)
 # enable debugging mode
 app.config["DEBUG"] = True
 
@@ -14,6 +15,7 @@ app.config['UPLOAD_FOLDER'] =  UPLOAD_FOLDER
 
 # Root URL
 @app.route('/')
+@cross_origin(supports_credentials=True)
 def index():
      # Set The upload HTML template '\templates\index.html'
     return render_template('index.html')
@@ -21,6 +23,7 @@ def index():
 
 # Get the uploaded files
 @app.route("/", methods=['POST'])
+@cross_origin(supports_credentials=True)
 def uploadFiles():
       # get the uploaded file
       uploaded_file = request.files['file']
