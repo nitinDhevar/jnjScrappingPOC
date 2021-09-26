@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for ,send_from_directory
 import os
 from os.path import join, dirname, realpath
 from flask_cors import CORS, cross_origin
@@ -11,6 +11,7 @@ app.config["DEBUG"] = True
 # Upload folder
 UPLOAD_FOLDER = 'static/files'
 app.config['UPLOAD_FOLDER'] =  UPLOAD_FOLDER
+DOWNLOAD_DIRECTORY = "download"
 
 
 # Root URL
@@ -33,6 +34,14 @@ def uploadFiles():
            uploaded_file.save(file_path)
           # save the file
       return redirect(url_for('index'))
+
+@app.route('/get-files/<path:path>',methods = ['GET','POST'])
+def get_files(path):
+
+    """Download a file."""
+    return send_from_directory(DOWNLOAD_DIRECTORY, path, as_attachment=True)
+
+
 
 if (__name__ == "__main__"):
      app.run(port = 5000)
