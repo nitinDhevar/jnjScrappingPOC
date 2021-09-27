@@ -5,7 +5,7 @@ from flask_cors import CORS, cross_origin
 import script
 
 app = Flask(__name__)
-CORS(app, support_credentials=True)
+CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 # enable debugging mode
 app.config["DEBUG"] = True
@@ -18,7 +18,6 @@ DOWNLOAD_DIRECTORY = "download"
 
 # Root URL
 @app.route('/')
-@cross_origin(supports_credentials=True)
 def index():
      # Set The upload HTML template '\templates\index.html'
     return render_template('index.html')
@@ -26,7 +25,6 @@ def index():
 
 # Get the uploaded files
 @app.route("/", methods=['POST'])
-@cross_origin(supports_credentials=True)
 def uploadFiles():
       # get the uploaded file
       uploaded_file = request.files['file']
@@ -38,7 +36,6 @@ def uploadFiles():
       return redirect(url_for('index'))
 
 @app.route('/get-files/<path:path>',methods = ['GET','POST'])
-@cross_origin(supports_credentials=True)
 def get_files(path):
 
     """Download a file."""
