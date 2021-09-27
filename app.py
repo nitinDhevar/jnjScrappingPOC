@@ -6,6 +6,7 @@ import script
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
+app.config['CORS_HEADERS'] = 'Content-Type'
 # enable debugging mode
 app.config["DEBUG"] = True
 
