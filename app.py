@@ -18,6 +18,7 @@ DOWNLOAD_DIRECTORY = "download"
 
 # Root URL
 @app.route('/')
+@cross_origin()
 def index():
      # Set The upload HTML template '\templates\index.html'
     return render_template('index.html')
@@ -25,6 +26,7 @@ def index():
 
 # Get the uploaded files
 @app.route("/", methods=['POST'])
+@cross_origin()
 def uploadFiles():
       # get the uploaded file
       uploaded_file = request.files['file']
@@ -36,6 +38,7 @@ def uploadFiles():
       return redirect(url_for('index'))
 
 @app.route('/get-files/<path:path>',methods = ['GET','POST'])
+@cross_origin()
 def get_files(path):
 
     """Download a file."""
