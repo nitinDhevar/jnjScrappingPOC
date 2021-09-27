@@ -3,7 +3,7 @@ import os
 from os.path import join, dirname, realpath
 from flask.wrappers import JSONMixin
 from flask_cors import CORS, cross_origin
-import script
+#import script
 
 app = Flask(__name__)
 CORS(app)
