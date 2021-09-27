@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for ,send_from_directory
 import os
 from os.path import join, dirname, realpath
+from flask.wrappers import JSONMixin
 from flask_cors import CORS, cross_origin
 import script
 
@@ -46,7 +47,8 @@ def get_files(path):
 
 @app.route('/runscript')
 def dynamic_page():
-    return script.your_function_in_the_module()
+    #return script.your_function_in_the_module()
+    return JSONMixin.dumps({'success':True}), 200, {'ContentType':'application/json'}
 
 
 
